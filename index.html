@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html> 
+<html ng-app="solitare"> 
   <head>
     <title>Solitare with Angular</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="app/app.js"></script>
   </head>
   <body>
-    Hello!
+    <div ng-controller="SolitareGameController as game">
+      <div class="game-row">
+        <div>Face-down cards here</div>
+        <div>{{game.deck.active}}</div>
+        <div>Blank</div>
+        <div ng-repeat="foundation in game.foundations">
+          {{foundation.id}}
+        </div>
+      </div>
+      <div class="game-row">
+        <div ng-repeat="pile in game.piles">
+          {{pile.id}}
+        </div>
+      </div>
+    </div>
   </body>
 </script>
