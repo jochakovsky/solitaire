@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="solitare"> 
+<html ng-app="solitaire"> 
   <head>
-    <title>Solitare with Angular</title>
+    <title>Solitaire with Angular</title>
     <link rel="stylesheet" href="static/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="app/app.js"></script>
   </head>
   <body>
-    <div ng-controller="SolitareGameController as game">
+    <div class="game" ng-controller="SolitaireGameController as game">
       <div class="game-row">
         <div>Face-down cards here</div>
         <div>{{game.deck.active}}</div>

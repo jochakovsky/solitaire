@@ -1,7 +1,7 @@
 (function(){
-    var app = angular.module('solitare', [ ]);
+    var app = angular.module('solitaire', [ ]);
 
-    app.controller('SolitareGameController', function(){
+    app.controller('SolitaireGameController', function(){
         this.deck = {
             active: "4h"
         };
