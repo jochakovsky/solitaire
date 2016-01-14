@@ -1,3 +1,7 @@
+body {
+    background-color: green;
+}
+
 .game-row div {
     width: 14.2%;
     display: inline;
