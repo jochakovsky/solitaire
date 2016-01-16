@@ -4,13 +4,10 @@ body {
 
 .game-row div {
     width: 14.2%;
+    float: left;
     display: inline;
 }
 
-.game-row {
-    width: 100%;
-}
-
-.game {
-    width: 100%;
+.clear {
+    clear: both;
 }
