@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html ng-app="solitaire"> 
-  <head>
-    <title>Solitaire with Angular</title>
-    <link rel="stylesheet" href="static/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="app/app.js"></script>
-  </head>
-  <body>
-    <div class="game" ng-controller="SolitaireGameController as game">
-      <div class="game-row">
-        <div>Face-down cards here</div>
-        <div>{{game.deck.active}}</div>
-        <div>Blank</div>
-        <div ng-repeat="foundation in game.foundations">
-          {{foundation.id}}
-        </div>
+<head>
+  <title>Solitaire with Angular</title>
+  <link rel="stylesheet" href="static/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="app/app.js"></script>
+</head>
+<body>
+  <div class="game" ng-controller="SolitaireGameController as game">
+    <div class="game-row">
+      <div>Face-down cards here</div>
+      <div>{{game.deck.active}}</div>
+      <div>
+        <svg>
+          <use xlink:href="static/cards-svg/AC.svg#svg2"></use>
+        </svg>
       </div>
-      <div class="game-row">
-        <div ng-repeat="pile in game.piles">
-          {{pile.id}}
-        </div>
+      <div ng-repeat="foundation in game.foundations">
+        {{foundation.id}}
       </div>
     </div>
-  </body>
-</script>
+    <div class="clear"></div>
+    <div class="game-row">
+      <div ng-repeat="pile in game.piles">
+        {{pile.id}}
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</body>
