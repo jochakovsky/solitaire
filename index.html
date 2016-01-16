@@ -12,9 +12,7 @@
       <div>Face-down cards here</div>
       <div>{{game.deck.active}}</div>
       <div>
-        <svg>
-          <use xlink:href="static/cards-svg/AC.svg#svg2"></use>
-        </svg>
+        <card></card>
       </div>
       <div ng-repeat="foundation in game.foundations">
         {{foundation.id}}

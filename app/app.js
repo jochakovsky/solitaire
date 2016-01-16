@@ -1,6 +1,13 @@
 (function(){
     var app = angular.module('solitaire', [ ]);
 
+    app.directive('card', function(){
+        return {
+            restrict: 'E',
+            templateUrl: 'card.html'
+        };
+    });
+
     app.controller('SolitaireGameController', function(){
         this.deck = {
             active: "4h"
