@@ -1,14 +1,20 @@
 (function(){
+    // var suits = ['C', 'D', 'H', 'S'];
+    // var ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
     var app = angular.module('solitaire', [ ]);
 
-    app.directive('card', function(){
+    app.directive('card', function() {
         return {
             restrict: 'E',
-            templateUrl: 'card.html'
+            templateUrl: 'card.html',
+            controller: ['$scope', '$attrs', function($scope, $attrs) {
+                $scope.filename = $attrs.rank + $attrs.suit;
+            }]
         };
     });
 
-    app.controller('SolitaireGameController', function(){
+    app.controller('SolitaireGameController', function() {
         this.deck = {
             active: "4h"
         };

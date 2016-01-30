@@ -10,10 +10,10 @@
   <div class="game" ng-controller="SolitaireGameController as game">
     <div class="game-row">
       <div>Face-down cards here</div>
-      <div>{{game.deck.active}}</div>
       <div>
-        <card></card>
+        <card data-rank="5" data-suit="C"></card>
       </div>
+      <div>X</div>
       <div ng-repeat="foundation in game.foundations">
         {{foundation.id}}
       </div>
