@@ -8,15 +8,21 @@
         return {
             restrict: 'E',
             templateUrl: 'card.html',
-            controller: ['$scope', '$attrs', function($scope, $attrs) {
-                $scope.filename = $attrs.rank + $attrs.suit;
+            scope: {
+                card: '='
+            },
+            controller: ['$scope', function($scope) {
+                $scope.filename = $scope.card.rank + $scope.card.suit;
             }]
         };
     });
 
     app.controller('SolitaireGameController', function() {
         this.deck = {
-            active: "4h"
+            activeCard: {
+                rank: '4',
+                suit: 'H'
+            }
         };
 
         this.foundations = [
