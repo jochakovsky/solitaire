@@ -1,7 +1,4 @@
 (function(){
-    // var suits = ['C', 'D', 'H', 'S'];
-    // var ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-
     var app = angular.module('solitaire', [ ]);
 
     app.directive('card', function() {
@@ -12,18 +9,96 @@
                 card: '='
             },
             controller: ['$scope', function($scope) {
-                $scope.filename = $scope.card.rank + $scope.card.suit;
+                var filename = '';
+                switch ($scope.card.rank) {
+                    case 1:
+                        filename += 'A';
+                        break;
+                    case 11:
+                        filename += 'J';
+                        break;
+                    case 12:
+                        filename += 'Q';
+                        break;
+                    case 13:
+                        filename += 'K';
+                        break;
+                    default:
+                        filename += $scope.card.rank;
+                }
+                filename += $scope.card.suit;
+                $scope.filename = filename;
             }]
         };
     });
 
-    app.controller('SolitaireGameController', function() {
-        this.deck = {
-            activeCard: {
-                rank: '4',
-                suit: 'H'
+    app.factory('Card', function() {
+        var Card = function(rank, suit) {
+            this.rank = rank;
+            this.suit = suit;
+        }
+
+        Card.prototype.minRank = 1;
+        Card.prototype.maxRank = 13;
+        Card.prototype.suits = ['C', 'D', 'H', 'S'];
+
+        return Card;
+    })
+
+    app.factory('Stock', ['Card', function(Card) {
+        Card.minRank = 1;
+        Card.maxRank = 13;
+        Card.suits = ['C', 'D', 'H', 'S'];
+        var Stock = function() {
+            //end of array is top of stock
+            this.cards = [];
+            for (var rank = Card.minRank; rank <= Card.maxRank; rank++) {
+                Card.suits.forEach(function(suit) {
+                    this.cards.push(new Card(rank, suit));
+                }, this);
             }
-        };
+            this.shuffle();
+        }
+
+        Stock.prototype.draw = function() {
+            return this.cards.pop();
+        }
+
+        Stock.prototype.addToBottom = function(card) {
+            this.cards.unshift(card);
+        }
+
+        //Fisher-Yates shuffle, http://stackoverflow.com/a/6274398
+        function shuffle(array) {
+            var counter = array.length, temp, index;
+
+            // While there are elements in the array
+            while (counter > 0) {
+                // Pick a random index
+                index = Math.floor(Math.random() * counter);
+
+                // Decrease counter by 1
+                counter--;
+
+                // And swap the last element with it
+                temp = array[counter];
+                array[counter] = array[index];
+                array[index] = temp;
+            }
+
+            return array;
+        }
+
+        Stock.prototype.shuffle = function() {
+            shuffle(this.cards);
+        }
+
+        return Stock;
+    }]);
+
+    app.controller('SolitaireGameController', ['Stock', function(Stock) {
+        var stock = new Stock();
+        this.activeCard = stock.draw();
 
         this.foundations = [
             {
@@ -63,6 +138,5 @@
                 id: 6
             }
         ];
-
-    });
+    }]);
 })();
