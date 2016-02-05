@@ -1,16 +1,11 @@
 (function(){
     var app = angular.module('solitaire', [ ]);
 
-    app.directive('card', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'card.html',
-            scope: {
-                card: '='
-            },
-            controller: ['$scope', function($scope) {
-                var filename = '';
-                switch ($scope.card.rank) {
+    app.filter('cardFilename', function() {
+        return function(card) {
+            var filename = '';
+            if (card) {
+                switch (card.rank) {
                     case 1:
                         filename += 'A';
                         break;
@@ -24,11 +19,24 @@
                         filename += 'K';
                         break;
                     default:
-                        filename += $scope.card.rank;
+                        filename += card.rank;
                 }
-                filename += $scope.card.suit;
-                $scope.filename = filename;
-            }]
+                filename += card.suit;
+            }
+            else {
+                filename = "Joker1";
+            }
+            return filename;
+        };
+    });
+
+    app.directive('card', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'card.html',
+            scope: {
+                card: '='
+            }
         };
     });
 
@@ -98,7 +106,16 @@
 
     app.controller('SolitaireGameController', ['Stock', function(Stock) {
         var stock = new Stock();
-        this.activeCard = stock.draw();
+        this.activeCard = false;
+
+        this.showNextStockCard = function() {
+            var tempCard = stock.draw();
+            if (this.activeCard) {
+                stock.addToBottom(this.activeCard);
+            }
+            this.activeCard = tempCard;
+            console.log(this.activeCard);
+        }
 
         this.foundations = [
             {

@@ -9,7 +9,9 @@
 <body>
   <div class="game" ng-controller="SolitaireGameController as game">
     <div class="game-row">
-      <div>Face-down cards here</div>
+      <div>
+        <button ng-click="game.showNextStockCard()">Take a card</button>
+      </div>
       <div>
         <card card="game.activeCard"></card>
       </div>
