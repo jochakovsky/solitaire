@@ -17,14 +17,14 @@
         <card card="game.activeCard"></card>
       </div>
       <div>X</div>
-      <div ng-repeat="foundation in game.foundations">
-        {{foundation.id}}
+      <div ng-repeat="foundation in game.foundations track by $index">
+        {{$index}}
       </div>
     </div>
     <div class="clear"></div>
     <div class="game-row">
-      <div ng-repeat="pile in game.piles">
-        {{pile.id}}
+      <div ng-repeat="pile in game.piles track by $index">
+        {{$index}}
       </div>
     </div>
     <div class="clear"></div>
