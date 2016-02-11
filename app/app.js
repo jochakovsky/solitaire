@@ -60,7 +60,8 @@
         var Stock = function() {
             //end of array is top of stock
             this.cards = [];
-            for (var rank = Card.minRank; rank <= Card.maxRank; rank++) {
+            // for (var rank = Card.minRank; rank <= Card.maxRank; rank++) {
+            for (var rank = Card.minRank; rank <= 4; rank++) {
                 Card.suits.forEach(function(suit) {
                     this.cards.push(new Card(rank, suit));
                 }, this);
@@ -76,29 +77,8 @@
             this.cards.unshift(card);
         }
 
-        //Fisher-Yates shuffle, http://stackoverflow.com/a/6274398
-        function shuffle(array) {
-            var counter = array.length, temp, index;
-
-            // While there are elements in the array
-            while (counter > 0) {
-                // Pick a random index
-                index = Math.floor(Math.random() * counter);
-
-                // Decrease counter by 1
-                counter--;
-
-                // And swap the last element with it
-                temp = array[counter];
-                array[counter] = array[index];
-                array[index] = temp;
-            }
-
-            return array;
-        }
-
         Stock.prototype.shuffle = function() {
-            shuffle(this.cards);
+            this.cards = _.shuffle(this.cards);
         }
 
         return Stock;
