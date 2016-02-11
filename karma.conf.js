@@ -18,7 +18,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore-min.js',
       'bower_components/angular/angular.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'app/*.js'
+      'app/**/*.js'
     ],
 
 
