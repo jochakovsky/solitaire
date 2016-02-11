@@ -6,6 +6,7 @@
   <script src="../bower_components/angular/angular.min.js"></script>
   <script src="../bower_components/underscore/underscore-min.js"></script>
   <script src="card/card.js"></script>
+  <script src="foundation/foundation.js"></script>
   <script src="app.js"></script>
 </head>
 <body>
@@ -19,13 +20,13 @@
       </div>
       <div>X</div>
       <div ng-repeat="foundation in game.foundations track by $index">
-        {{$index}}
+        Foundation {{$index}}
       </div>
     </div>
     <div class="clear"></div>
     <div class="game-row">
       <div ng-repeat="pile in game.piles track by $index">
-        {{$index}}
+        Pile {{$index}}
       </div>
     </div>
     <div class="clear"></div>

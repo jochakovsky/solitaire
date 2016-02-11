@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('solitaire', ['card']);
+    var app = angular.module('solitaire', ['card', 'foundation']);
 
     app.factory('Stock', ['Card', function(Card) {
         var Stock = function() {
@@ -31,41 +31,6 @@
         return Stock;
     }]);
 
-    app.factory('Foundation', function() {
-        var Foundation = function() {
-            this.cards = [];
-        };
-
-        /**
-         * Try to add a card to the top of the foundation. On success, return
-         * true, else return false.
-         * @param {[type]} card [description]
-         */
-        Foundation.prototype.addCard = function(card) {
-            if (this.cards.length == 0) {
-                if (card.rank == card.minRank) {
-                    this.cards.push(card);
-                }
-                else {
-                    return false;
-                }
-            }
-            else {
-                var lastCard = this.cards[this.cards.length - 1];
-                if (card.rank == lastCard.rank + 1
-                    && card.suit == lastCard.suit) {
-                    this.cards.push(card);
-                }
-                else {
-                    return false;
-                }
-            }
-            return true;
-        };
-
-        return Foundation;
-    });
-
     app.controller('SolitaireGameController', ['Stock', function(Stock) {
         var stock = new Stock();
         this.activeCard = false;
@@ -79,7 +44,6 @@
         };
 
         this.foundations = new Array(4);
-
 
         this.piles = new Array(7);
     }]);
