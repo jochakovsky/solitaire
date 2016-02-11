@@ -120,7 +120,7 @@
             return true;
         };
 
-
+        return Foundation;
     });
 
     app.controller('SolitaireGameController', ['Stock', function(Stock) {
