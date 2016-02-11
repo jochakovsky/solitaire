@@ -1,0 +1,23 @@
+{
+  "name": "SolitaireWithAngular",
+  "description": "I'm learning Angular by building Klondike Solitaire.",
+  "main": "",
+  "authors": [
+    "Joshua Ochakovsky <josh@ochakovsky.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jochakovsky/solitaire",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "underscore": "^1.8.3"
+  }
+}
