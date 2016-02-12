@@ -1,6 +1,6 @@
 describe('card', function() {
     beforeEach(module('card'));
-    beforeEach(module('templates'));
+    beforeEach(module('card-templates'));
 
     describe('Card', function() {
         var Card;

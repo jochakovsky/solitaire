@@ -34,33 +34,14 @@ module.exports = function(config) {
       '**/*.html': ['ng-html2js']
     },
 
+
     ngHtml2JsPreprocessor: {
-      // strip this from the file path
-      // stripPrefix: 'app/',
-      // stripSuffix: '.ext',
-      // prepend this to the
-      // prependPrefix: 'app/',
-
-      // or define a custom transform function
-      // - cacheId returned is used to load template
-      //   module(cacheId) will return template at filepath
-      // cacheIdFromPath: function(filepath) {
-      //   // example strips 'public/' from anywhere in the path
-      //   // module(app/templates/template.html) => app/public/templates/template.html
-      //   var cacheId = filepath.strip('public/', '');
-      //   return cacheId;
-      // },
-
-      // - setting this option will create only a single module that contains templates
-      //   from all the files, so you can load them all with module('foo')
-      // - you may provide a function(htmlPath, originalPath) instead of a string
-      //   if you'd like to generate modules dynamically
-      //   htmlPath is a originalPath stripped and/or prepended
-      //   with all provided suffixes and prefixes
-      moduleName: 'templates'
-      // moduleName: function(htmlPath, originalPath) {
-      //   return htmlPath.split('/')[1] + '-templates';
-      // }
+      // Folder structure for this project is app/foo/bar.html, where foo is
+      // the name of the Angular module defined in app/foo/foo.js. This will
+      // make bar.html available in the foo-templates module for testing.
+      moduleName: function(htmlPath, originalPath) {
+        return htmlPath.split('/')[1] + '-templates';
+      }
     },
 
     // test results reporter to use
