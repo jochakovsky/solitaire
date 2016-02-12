@@ -1,5 +1,8 @@
 describe('foundation', function() {
-    beforeEach(module('foundation'));
+    beforeEach(function() {
+        module('foundation');
+        module('card');
+    });
 
     describe('Foundation', function() {
         var Foundation, Card, test;

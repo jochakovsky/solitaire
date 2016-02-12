@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('foundation', ['card']);
+    var app = angular.module('foundation', [ ]);
 
     app.factory('Foundation', function() {
         var Foundation = function() {
