@@ -1,6 +1,6 @@
 describe('card', function() {
     beforeEach(module('card'));
-    // beforeEach(module('card-templates'));
+    beforeEach(module('templates'));
 
     describe('Card', function() {
         var Card;
@@ -69,25 +69,28 @@ describe('card', function() {
         });
     });
 
-    // describe('card element directive', function() {
-    //     var $compile, $rootScope;
+    describe('card element directive', function() {
+        var $compile, $rootScope, scope;
 
-    //     // Store references to $rootScope and $compile
-    //     // so they are available to all tests in this describe block
-    //     beforeEach(inject(function(_$compile_, _$rootScope_){
-    //         // The injector unwraps the underscores (_) from around the parameter names when matching
-    //         $compile = _$compile_;
-    //         $rootScope = _$rootScope_;
-    //     }));
+        // Store references to $rootScope and $compile
+        // so they are available to all tests in this describe block
+        beforeEach(inject(function(_$compile_, _$rootScope_){
+            // The injector unwraps the underscores (_) from around the parameter names when matching
+            $compile = _$compile_;
+            $rootScope = _$rootScope_;
+            scope = $rootScope.$new();
+        }));
 
-    //     it('Replaces the element with the appropriate content', function() {
-    //         $rootScope.testCard = {rank: 4, suit: "H"};
-    //         // Compile a piece of HTML containing the directive
-    //         var element = $compile("<card card=\"testCard\"></card>")($rootScope);
-    //         // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
-    //         $rootScope.$digest();
-    //         // Check that the compiled element contains the templated content
-    //         expect(element.html()).toContain("<img ng-src=\"../static/cards-svg/4H.svg\"></img>");
-    //     });
-    // });
+        it('Replaces the element with the appropriate content', function() {
+            // $rootScope.testCard = {rank: 4, suit: "H"};
+            // Compile a piece of HTML containing the directive
+            scope.testCard = {rank: 4, suit: "H"};
+            var element = $compile("<card card=\"testCard\"></card>")(scope);
+            
+            // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
+            scope.$digest();
+            // Check that the compiled element contains the templated content
+            expect(element.attr("src")).toEqual("../static/cards-svg/4H.svg");
+        });
+    });
 });
