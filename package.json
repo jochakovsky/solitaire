@@ -1,7 +1,6 @@
 {
-  "name": "SolitaireWithAngular",
-  "description": "I'm learning Angular by building Klondike Solitaire.",
   "author": "Joshua Ochakovsky <josh@ochakovsky.com>",
+  "description": "I'm learning Angular by building Klondike Solitaire.",
   "devDependencies": {
     "http-server": "^0.8.5",
     "jasmine": "^2.4.1",
@@ -10,6 +9,9 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.4"
   },
+  "license": "UNLICENSED",
+  "name": "SolitaireWithAngular",
+  "repository": "jochakovsky/solitaire",
   "scripts": {
     "start": "http-server -a localhost -p 8000 -c-1",
     "test": "karma start karma.conf.js"
