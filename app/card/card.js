@@ -37,7 +37,7 @@
             scope: {
                 card: '='
             },
-            templateUrl: 'card/card.html'
+            templateUrl: 'app/card/card.html'
         };
     });
 
