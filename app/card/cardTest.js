@@ -30,4 +30,41 @@ describe('card', function() {
             expect(card.suits).toContain('S');
         });
     });
+
+    describe('cardFilename', function() {
+        var Card, cardFilename;
+
+        beforeEach(inject(function(_Card_) {
+            Card = _Card_;
+        }));
+
+        beforeEach(inject(function(cardFilenameFilter) {
+            cardFilename = cardFilenameFilter;
+        }))
+
+        it('should have the correct default filename', function() {
+            expect(cardFilename(undefined)).toEqual('Joker1');
+        });
+
+        it('should treat aces correctly', function() {
+            var card = new Card(1, 'H');
+            expect(cardFilename(card)).toEqual('AH');
+        });
+
+        it('should treat face cards correctly', function() {
+            var card = new Card(11, 'H');
+            expect(cardFilename(card)).toEqual('JH');
+
+            card = new Card(12, 'H');
+            expect(cardFilename(card)).toEqual('QH');
+
+            card = new Card(13, 'H');
+            expect(cardFilename(card)).toEqual('KH');
+        });
+
+        it('should treat number cards correctly', function() {
+            var card = new Card(8, 'C');
+            expect(cardFilename(card)).toEqual('8C');
+        });
+    });
 });
