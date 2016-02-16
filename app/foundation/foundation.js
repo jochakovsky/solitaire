@@ -2,8 +2,9 @@
     var app = angular.module('foundation', [ ]);
 
     app.factory('Foundation', function() {
-        var Foundation = function() {
+        var Foundation = function(id) {
             this.cards = [];
+            this.id = id;
         };
 
         /**
@@ -34,5 +35,16 @@
         };
 
         return Foundation;
+    });
+
+    app.directive('foundation', function() {
+        return {
+            replace: true,
+            restrict: 'E',
+            scope: {
+                foundation: '='
+            },
+            templateUrl: 'app/foundation/foundation.html'
+        };
     });
 })();

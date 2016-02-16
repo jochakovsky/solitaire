@@ -20,8 +20,8 @@
         <card card="game.activeCard"></card>
       </div>
       <div>X</div>
-      <div ng-repeat="foundation in game.foundations track by $index">
-        Foundation {{$index}}
+      <div ng-repeat="foundation in game.foundations">
+        <foundation foundation="foundation"></foundation>
       </div>
     </div>
     <div class="clear"></div>
