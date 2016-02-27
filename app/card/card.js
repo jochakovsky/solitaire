@@ -31,7 +31,17 @@
     });
 
     app.directive('card', function() {
+        var dragstartHandler = function(event) {
+            event.dataTransfer.setData("text/plain", event.target.id);
+            event.dataTransfer.dropEffect = "move";
+        }
+
+        var link = function(scope, element, attrs) {
+            element.on('dragstart', dragstartHandler);
+        };
+
         return {
+            link: link,
             replace: true,
             restrict: 'E',
             scope: {

@@ -38,7 +38,24 @@
     });
 
     app.directive('foundation', function() {
+        var dragoverHandler = function(event) {
+            event.preventDefault();
+        }
+
+        var dropHandler = function(event) {
+            event.preventDefault();
+
+            var data = event.dataTransfer.getData("text");
+            alert(data + " dropped.");
+        }
+
+        var link = function(scope, element, attrs) {
+            element.on('dragover', dragoverHandler);
+            element.on('drop', dropHandler);
+        };
+
         return {
+            link: link,
             replace: true,
             restrict: 'E',
             scope: {
