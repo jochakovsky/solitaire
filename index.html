@@ -12,18 +12,18 @@
 </head>
 <body>
   <div class="game" ng-controller="SolitaireGameController as game">
-    <div class="game-row">
+    <div class="game-row top-game-row">
       <div>
         <button ng-click="game.showNextStockCard()">Take a card</button>
       </div>
       <div>
-        <card ng-repeat="card in game.waste" card="card"></card>
+        <card ng-repeat="card in game.waste" card="card" class="waste-card"></card>
       </div>
-      <div>X</div>
+      <div></div>
       <foundation ng-repeat="foundation in game.foundations" foundation="foundation"></foundation>
     </div>
     <div class="clear"></div>
-    <div class="game-row">
+    <div class="game-row bottom-game-row">
       <div ng-repeat="pile in game.piles track by $index">
         Pile {{$index}}
       </div>
