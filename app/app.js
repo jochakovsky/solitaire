@@ -6,11 +6,8 @@
         this.activeCard = false;
 
         this.showNextStockCard = function() {
-            var tempCard = stock.draw();
-            if (this.activeCard) {
-                stock.addToBottom(this.activeCard);
-            }
-            this.activeCard = tempCard;
+            stock.return(this.activeCard);
+            this.activeCard = stock.draw();
         };
 
         var numberOfFoundations = 4;
