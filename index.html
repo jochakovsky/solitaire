@@ -17,7 +17,7 @@
         <button ng-click="game.showNextStockCard()">Take a card</button>
       </div>
       <div>
-        <card card="game.activeCard"></card>
+        <card ng-repeat="card in game.waste" card="card"></card>
       </div>
       <div>X</div>
       <foundation ng-repeat="foundation in game.foundations" foundation="foundation"></foundation>
