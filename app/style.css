@@ -2,15 +2,18 @@ body {
     background-color: green;
 }
 
-.pcard {
-    display: inline-block;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100%;
+*[class^="pcard-"], *[class*=" pcard-"] {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+/*  background-size: 100% 100%;
+  width: 223px;
+  height: 324px;*/
 }
 
 /* http://stackoverflow.com/a/24175439 */
-.pcard:before {
+*[class^="pcard-"], *[class*=" pcard-"]:before {
     content: "";
     float: left;
 
@@ -23,7 +26,25 @@ body {
    clearfix you usually use, add
    overflow:hidden to the parent element,
    or simply float the parent container. */
-.pcard:after {
+*[class^="pcard-"], *[class*=" pcard-"]:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.stack-bottom {
+    display: inline-block;
+    background-color: lightgreen;
+    width: 100%;
+}
+
+.stack-bottom:before {
+    content: "";
+    float: left;
+    padding-bottom: 145.3%;
+}
+
+.stack-bottom:after {
     content: "";
     display: table;
     clear: both;
