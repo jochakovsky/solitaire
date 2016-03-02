@@ -14,7 +14,6 @@
                 stock.return(this.waste);
                 this.waste = [];
             }
-            console.log(this.waste);
         };
 
         var numberOfFoundations = 4;
