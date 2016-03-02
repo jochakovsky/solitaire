@@ -90,7 +90,7 @@ describe('card', function() {
             // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
             scope.$digest();
             // Check that the compiled element contains the templated content
-            expect(element.attr("src")).toEqual("../static/cards-svg/4H.svg");
+            expect(element.attr("class")).toContain("pcard-4h");
         });
     });
 });

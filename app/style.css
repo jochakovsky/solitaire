@@ -2,6 +2,32 @@ body {
     background-color: green;
 }
 
+.pcard {
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+}
+
+/* http://stackoverflow.com/a/24175439 */
+.pcard:before {
+    content: "";
+    float: left;
+
+    /* essentially the aspect ratio. 100% means the
+       div will remain 100% as tall as it is wide, or
+       square in other words.  */
+    padding-bottom: 145.3%;
+}
+/* this is a clearfix. you can use whatever
+   clearfix you usually use, add
+   overflow:hidden to the parent element,
+   or simply float the parent container. */
+.pcard:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .game {
     position: absolute;
     width: 100%;
@@ -33,7 +59,6 @@ body {
 .waste-card {
     top: 0px;
     left: 0px;
-    width: 100%;
     position: absolute;
 }
 
