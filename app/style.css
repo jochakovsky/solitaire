@@ -3,6 +3,7 @@ body {
 }
 
 .pcard {
+    display: inline-block;
     background-repeat: no-repeat;
     background-size: contain;
     width: 100%;

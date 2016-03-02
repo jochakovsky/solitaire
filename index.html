@@ -15,7 +15,7 @@
   <div class="game" ng-controller="SolitaireGameController as game">
     <div class="game-row top-game-row">
       <div>
-        <button ng-click="game.showNextStockCard()">Take a card</button>
+        <span ng-click="game.showNextStockCard()" class="pcard" ng-class="{'pcard-back': game.stockHasCardsLeft}"></span>
       </div>
       <div>
         <card ng-repeat="card in game.waste" card="card" class="waste-card"></card>

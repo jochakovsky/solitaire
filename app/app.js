@@ -4,6 +4,7 @@
     app.controller('SolitaireGameController', ['Stock', 'Foundation', function(Stock, Foundation) {
         var stock = new Stock();
         this.waste = [];
+        this.stockHasCardsLeft = true;
 
         this.showNextStockCard = function() {
             var card = stock.draw();
@@ -14,6 +15,7 @@
                 stock.return(this.waste);
                 this.waste = [];
             }
+            this.stockHasCardsLeft = stock.cards.length > 0;
         };
 
         var numberOfFoundations = 4;
