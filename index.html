@@ -15,14 +15,20 @@
   <div class="game" ng-controller="SolitaireGameController as game">
     <div class="game-row top-game-row">
       <div>
-        <span ng-click="game.showNextStockCard()" ng-class="{'pcard-back': game.stockHasCardsLeft, 'stack-bottom': !game.stockHasCardsLeft}">
+        <span
+          ng-click="game.showNextStockCard()"
+          ng-class="{'pcard-back': game.stockHasCardsLeft, 'stack-bottom': !game.stockHasCardsLeft}">
         </span>
       </div>
       <div>
         <card ng-repeat="card in game.waste" card="card" class="waste-card"></card>
       </div>
       <div></div>
-      <foundation ng-repeat="foundation in game.foundations" foundation="foundation"></foundation>
+      <foundation
+        ng-repeat="foundation in game.foundations"
+        foundation="foundation"
+        drop="game.dropHandler">
+      </foundation>
     </div>
     <div class="clear"></div>
     <div class="game-row bottom-game-row">

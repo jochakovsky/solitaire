@@ -3,8 +3,10 @@
 
     app.controller('SolitaireGameController', ['Stock', 'Foundation', function(Stock, Foundation) {
         var stock = new Stock();
+
         this.waste = [];
         this.stockHasCardsLeft = true;
+        this.cardLookup = stock.cardLookup;
 
         this.showNextStockCard = function() {
             var card = stock.draw();
@@ -25,5 +27,9 @@
         }
 
         this.piles = new Array(7);
+
+        this.dropHandler = function(data) {
+            console.log(data);
+        }
     }]);
 })();

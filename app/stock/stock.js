@@ -7,12 +7,16 @@
 
             //end of array is top of stock
             this.cards = [];
+
+            var cardId = 0;
             // for (var rank = Card.minRank; rank <= Card.maxRank; rank++) {
             for (var rank = sampleCard.minRank; rank <= 4; rank++) {
                 sampleCard.suits.forEach(function(suit) {
-                    this.cards.push(new Card(rank, suit));
+                    this.cards[cardId] = (new Card(rank, suit, cardId));
+                    cardId++;
                 }, this);
             }
+            this.cardLookup = this.cards;
             this.shuffle();
         };
 

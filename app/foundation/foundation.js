@@ -38,20 +38,15 @@
     });
 
     app.directive('foundation', function() {
-        var dragoverHandler = function(event) {
-            event.preventDefault();
-        }
-
-        var dropHandler = function(event) {
-            event.preventDefault();
-
-            var data = event.dataTransfer.getData("text");
-            alert(data + " dropped.");
-        }
-
         var link = function(scope, element, attrs) {
-            element.on('dragover', dragoverHandler);
-            element.on('drop', dropHandler);
+            element.on('dragover', function(event) {
+                event.preventDefault();
+            });
+
+            element.on('drop', function(event) {
+                event.preventDefault();
+                scope.drop()(event.dataTransfer.getData("text"));
+            });
         };
 
         return {
@@ -59,7 +54,8 @@
             replace: true,
             restrict: 'E',
             scope: {
-                foundation: '='
+                foundation: '=',
+                drop: '&'
             },
             templateUrl: 'app/foundation/foundation.html'
         };

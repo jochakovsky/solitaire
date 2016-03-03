@@ -52,9 +52,10 @@
     });
 
     app.factory('Card', function() {
-        var Card = function(rank, suit) {
+        var Card = function(rank, suit, id) {
             this.rank = rank;
             this.suit = suit;
+            this.id = id;
         };
 
         Card.prototype.isRed = function() {
