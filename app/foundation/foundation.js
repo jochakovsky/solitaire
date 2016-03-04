@@ -45,7 +45,8 @@
 
             element.on('drop', function(event) {
                 event.preventDefault();
-                scope.drop()(event.dataTransfer.getData("text"));
+                scope.drop()(event.dataTransfer.getData("text"),
+                    "foundation-" + scope.foundation.id);
             });
         };
 

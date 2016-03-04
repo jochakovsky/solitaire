@@ -28,8 +28,35 @@
 
         this.piles = new Array(7);
 
-        this.dropHandler = function(data) {
-            console.log(data);
-        }
+        var moveCardToFoundation = function(card, foundation) {
+            alert("dropped card " + card.id + " onto foundation " + foundation.id);
+        };
+
+        var solitaireGameController = this;
+        this.dropHandler = function(data, bin) {
+            var sgc = solitaireGameController;
+
+            var parsed = data.split('-');
+            var dropObject = parsed[0];
+            var dropId = parseInt(parsed[1]);
+
+            parsed = bin.split('-');
+            var binObject = parsed[0];
+            var binId = parseInt(parsed[1]);
+
+            if (dropObject != 'card') {
+                throw "Invalid drop";
+            }
+
+            var card = sgc.cardLookup[dropId];
+
+            switch (binObject) {
+                case 'foundation':
+                    moveCardToFoundation(card, sgc.foundations[binId]);
+                    break;
+                default:
+                    throw "Invalid drop";
+            }
+        };
     }]);
 })();
