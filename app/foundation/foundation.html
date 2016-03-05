@@ -1,8 +1,4 @@
 <div id="foundation-{{foundation.id}}">
-    Foundation {{foundation.id}}!
-    <div ng-repeat="card in foundation.cards">
-        <card card="card"></card>
-    </div>
-    Drop card here!
-    See what happens!
+    <div class="pcard-bottom-of-stack">
+    <card ng-repeat="card in foundation.cards" card="card" class="foundation-card"></card>
 </div>

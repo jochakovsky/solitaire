@@ -7,31 +7,32 @@
             this.id = id;
         };
 
-        /**
-         * Try to add a card to the top of the foundation. On success, return
-         * true, else return false.
-         * @param {[type]} card [description]
-         */
-        Foundation.prototype.addCard = function(card) {
+        Foundation.prototype.canAddCard = function(card) {
             if (this.cards.length == 0) {
-                if (card.rank == card.minRank) {
-                    this.cards.push(card);
-                }
-                else {
-                    return false;
-                }
+                return card.rank == card.minRank;
             }
             else {
-                var lastCard = this.cards[this.cards.length - 1];
-                if (card.rank == lastCard.rank + 1
-                    && card.suit == lastCard.suit) {
-                    this.cards.push(card);
-                }
-                else {
-                    return false;
-                }
+                return card.rank == this.topCard().rank + 1
+                    && card.suit == this.topCard().suit;
             }
-            return true;
+        };
+
+        Foundation.prototype.addCard = function(card) {
+            if (this.canAddCard(card)) {
+                this.cards.push(card);
+            }
+        };
+
+        Foundation.prototype.canRemoveCard = function(card) {
+            return card == this.topCard();
+        };
+
+        Foundation.prototype.removeCard = function(card) {
+            return this.cards.pop();
+        };
+
+        Foundation.prototype.topCard = function() {
+            return this.cards[this.cards.length - 1];
         };
 
         return Foundation;

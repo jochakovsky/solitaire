@@ -2,52 +2,19 @@ body {
     background-color: green;
 }
 
+.pcard-bottom-of-stack {
+    background-color: lightgreen;
+}
+
 *[class^="pcard-"], *[class*=" pcard-"] {
-  display: inline-block;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100%;
+    width: 100px;
+    height: 145px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 /*  background-size: 100% 100%;
   width: 223px;
   height: 324px;*/
-}
-
-/* http://stackoverflow.com/a/24175439 */
-*[class^="pcard-"], *[class*=" pcard-"]:before {
-    content: "";
-    float: left;
-
-    /* essentially the aspect ratio. 100% means the
-       div will remain 100% as tall as it is wide, or
-       square in other words.  */
-    padding-bottom: 145.3%;
-}
-/* this is a clearfix. you can use whatever
-   clearfix you usually use, add
-   overflow:hidden to the parent element,
-   or simply float the parent container. */
-*[class^="pcard-"], *[class*=" pcard-"]:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.stack-bottom {
-    display: inline-block;
-    background-color: lightgreen;
-    width: 100%;
-}
-
-.stack-bottom:before {
-    content: "";
-    float: left;
-    padding-bottom: 145.3%;
-}
-
-.stack-bottom:after {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 .game {
@@ -68,7 +35,7 @@ body {
     position: relative;
 }
 
-.game-row div {
+.game-row > div {
     width: 14%;
     height: 100%;
     float: left;
@@ -78,7 +45,7 @@ body {
     position: relative;
 }
 
-.waste-card {
+.waste-card, .foundation-card {
     top: 0px;
     left: 0px;
     position: absolute;
