@@ -45,7 +45,7 @@ body {
     position: relative;
 }
 
-.waste-card, .foundation-card {
+.waste-card, .foundation-card, .stock-card {
     top: 0px;
     left: 0px;
     position: absolute;

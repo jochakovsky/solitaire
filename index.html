@@ -16,10 +16,10 @@
   <div class="game" ng-controller="SolitaireGameController as game">
     <div class="game-row top-game-row">
       <div>
-        <span
-          ng-click="game.showNextStockCard()"
-          ng-class="{'pcard-back': game.stockHasCardsLeft, 'pcard-bottom-of-stack': !game.stockHasCardsLeft}">
-        </span>
+        <div ng-click="game.showNextStockCard()">
+          <span class="pcard-bottom-of-stack"></span>
+          <span class="pcard-back stock-card" ng-if="game.stockHasCardsLeft"></span>
+        </div>
       </div>
       <waste waste="game.waste"></waste>
       <div></div>
