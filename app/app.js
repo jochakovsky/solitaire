@@ -1,7 +1,9 @@
 (function(){
     var app = angular.module('solitaire', ['card', 'foundation', 'stock', 'waste']);
 
-    app.controller('SolitaireGameController', ['Stock', 'Foundation', 'Waste', function(Stock, Foundation, Waste) {
+    app.controller('SolitaireGameController', ['Stock', 'Foundation', 'Waste', '$scope', function(Stock, Foundation, Waste, $scope) {
+        var solitaireGameController = this;
+        
         var stock = new Stock();
         this.waste = new Waste();
 
@@ -28,7 +30,6 @@
 
         this.piles = new Array(7);
 
-        var solitaireGameController = this;
         this.dropHandler = function(data, bin) {
             var sgc = solitaireGameController;
 
@@ -54,5 +55,16 @@
                     throw "Invalid drop";
             }
         };
+
+        $scope.$on('cardDoubleClick', function(event, cardId) {
+            var sgc = solitaireGameController;
+            var card = sgc.cardLookup[cardId];
+            for (var i = 0; i < sgc.foundations.length; i++) {
+                if (card.moveTo(sgc.foundations[i])) {
+                    break;
+                }
+            }
+            $scope.$apply();
+        });
     }]);
 })();

@@ -31,13 +31,16 @@
     });
 
     app.directive('card', function() {
-        var dragstartHandler = function(event) {
-            event.dataTransfer.setData("text/plain", event.target.id);
-            event.dataTransfer.dropEffect = "move";
-        }
 
         var link = function(scope, element, attrs) {
-            element.on('dragstart', dragstartHandler);
+            element.on('dragstart', function(event) {
+                event.dataTransfer.setData("text/plain", event.target.id);
+                event.dataTransfer.dropEffect = "move";
+            });
+
+            element.on('dblclick', function(event) {
+                scope.$emit('cardDoubleClick', scope.card.id);
+            })
         };
 
         return {
