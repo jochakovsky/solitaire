@@ -28,10 +28,6 @@
 
         this.piles = new Array(7);
 
-        var moveCardToFoundation = function(card, foundation) {
-            alert("dropped card " + card.id + " onto foundation " + foundation.id);
-        };
-
         var solitaireGameController = this;
         this.dropHandler = function(data, bin) {
             var sgc = solitaireGameController;
@@ -52,7 +48,7 @@
 
             switch (binObject) {
                 case 'foundation':
-                    moveCardToFoundation(card, sgc.foundations[binId]);
+                    card.moveTo(sgc.foundations[binId]);
                     break;
                 default:
                     throw "Invalid drop";
