@@ -9,6 +9,7 @@
   <script src="app/card/card.js"></script>
   <script src="app/foundation/foundation.js"></script>
   <script src="app/stock/stock.js"></script>
+  <script src="app/waste/waste.js"></script>
   <script src="app/app.js"></script>
 </head>
 <body>
@@ -20,9 +21,7 @@
           ng-class="{'pcard-back': game.stockHasCardsLeft, 'stack-bottom': !game.stockHasCardsLeft}">
         </span>
       </div>
-      <div>
-        <card ng-repeat="card in game.waste" card="card" class="waste-card"></card>
-      </div>
+      <waste waste="game.waste"></waste>
       <div></div>
       <foundation
         ng-repeat="foundation in game.foundations"

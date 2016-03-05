@@ -1,21 +1,20 @@
 (function(){
-    var app = angular.module('solitaire', ['card', 'foundation', 'stock']);
+    var app = angular.module('solitaire', ['card', 'foundation', 'stock', 'waste']);
 
-    app.controller('SolitaireGameController', ['Stock', 'Foundation', function(Stock, Foundation) {
+    app.controller('SolitaireGameController', ['Stock', 'Foundation', 'Waste', function(Stock, Foundation, Waste) {
         var stock = new Stock();
+        this.waste = new Waste();
 
-        this.waste = [];
         this.stockHasCardsLeft = true;
         this.cardLookup = stock.cardLookup;
 
         this.showNextStockCard = function() {
             var card = stock.draw();
             if (card) {
-                this.waste.push(card);
+                this.waste.addCard(card);
             }
             else {
-                stock.return(this.waste);
-                this.waste = [];
+                stock.return(this.waste.empty());
             }
             this.stockHasCardsLeft = stock.cards.length > 0;
         };
