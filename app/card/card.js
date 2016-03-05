@@ -66,6 +66,10 @@
             alert("Moving card " + this.id + " onto thing " + destination.id);
         }
 
+        Card.prototype.moveToAppropriateFoundation = function() {
+            alert("Moving card " + this.id + " to an appropriate foundation.");
+        }
+
         Card.prototype.minRank = 1;
         Card.prototype.maxRank = 13;
         Card.prototype.suits = ['C', 'D', 'H', 'S'];
