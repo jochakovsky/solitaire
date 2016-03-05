@@ -48,6 +48,7 @@
                 event.preventDefault();
                 scope.drop()(event.dataTransfer.getData("text"),
                     "foundation-" + scope.foundation.id);
+                scope.$apply();
             });
         };
 

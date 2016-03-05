@@ -77,7 +77,7 @@
         }
 
         Card.prototype.moveToAppropriateFoundation = function() {
-            alert("Moving card " + this.id + " to an appropriate foundation.");
+            alert("Double click to move to foundation not implemented.");
         }
 
         Card.prototype.minRank = 1;
