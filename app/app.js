@@ -9,14 +9,15 @@
         this.cardLookup = stock.cardLookup;
 
         this.showNextStockCard = function() {
-            var card = stock.draw();
-            if (card) {
-                this.waste.addCard(card);
+            if (stock.topCard()) {
+                stock.topCard().moveTo(this.waste);
             }
             else {
-                stock.return(this.waste.empty());
+                while (this.waste.topCard()) {
+                    this.waste.topCard().moveTo(stock);
+                }
             }
-            this.stockHasCardsLeft = stock.cards.length > 0;
+            this.stockHasCardsLeft = stock.topCard() ? true : false;
         };
 
         var numberOfFoundations = 4;

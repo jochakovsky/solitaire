@@ -12,7 +12,7 @@
             // for (var rank = Card.minRank; rank <= Card.maxRank; rank++) {
             for (var rank = sampleCard.minRank; rank <= 4; rank++) {
                 sampleCard.suits.forEach(function(suit) {
-                    this.cards[cardId] = (new Card(rank, suit, cardId));
+                    this.cards[cardId] = (new Card(rank, suit, cardId, this));
                     cardId++;
                 }, this);
             }
@@ -20,26 +20,24 @@
             this.shuffle();
         };
 
-        Stock.prototype.draw = function() {
-            // if (this.cards.length == 0) {
-            //     this.cards = this.returnedCards.reverse();
-            //     this.returnedCards = [];
-            //     return null;
-            // }
-            // else {
-            //     var drawnCards = [];
-            //     while (num > 0 && this.cards.length > 0) {
-            //         drawnCards.push(this.cards.pop());
-            //     }
-            //     return drawnCards;
-            // }
+        Stock.prototype.canAddCard = function(card) {
+            return true;
+        };
+
+        Stock.prototype.addCard = function(card) {
+            this.cards.push(card);
+        };
+
+        Stock.prototype.canRemoveCard = function(card) {
+            return this.cards.length > 0;
+        };
+
+        Stock.prototype.removeCard = function(card) {
             return this.cards.pop();
         };
 
-        Stock.prototype.return = function(waste) {
-            if (this.cards.length == 0) {
-                this.cards = waste.reverse();
-            }
+        Stock.prototype.topCard = function() {
+            return this.cards[this.cards.length - 1];
         };
 
         Stock.prototype.shuffle = function() {

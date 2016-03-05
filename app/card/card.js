@@ -52,10 +52,11 @@
     });
 
     app.factory('Card', function() {
-        var Card = function(rank, suit, id) {
+        var Card = function(rank, suit, id, location) {
             this.rank = rank;
             this.suit = suit;
             this.id = id;
+            this.location = location;
         };
 
         Card.prototype.isRed = function() {
@@ -63,7 +64,16 @@
         };
 
         Card.prototype.moveTo = function(destination) {
-            alert("Moving card " + this.id + " onto thing " + destination.id);
+            // alert("Moving card " + this.id + " onto thing " + destination.id);
+            if (this.location.canRemoveCard(this) && destination.canAddCard(this)) {
+                this.location.removeCard(this);
+                this.location = destination;
+                this.location.addCard(this);
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 
         Card.prototype.moveToAppropriateFoundation = function() {
