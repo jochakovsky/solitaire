@@ -9,12 +9,9 @@ body {
 *[class^="pcard-"], *[class*=" pcard-"] {
     width: 100px;
     height: 145px;
-    display: inline-block;
+    display: block;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-/*  background-size: 100% 100%;
-  width: 223px;
-  height: 324px;*/
 }
 
 .game {
@@ -23,23 +20,14 @@ body {
     height: 100%;
 }
 
-.top-game-row {
-    height: 25%;
-}
-
-.bottom-game-row {
-    height: 70%;
-}
-
 .game-row {
     position: relative;
+    display: flex;
 }
 
 .game-column {
-    width: 14%;
-    height: 100%;
-    float: left;
-    display: inline;
+    width: 100px;
+    margin: 5px;
     vertical-align: top;
     border:1px solid black;
     position: relative;
