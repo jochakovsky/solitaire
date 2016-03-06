@@ -30,7 +30,7 @@
 
         this.piles = new Array(7);
 
-        this.dropHandler = function(data, bin) {
+        $scope.$on('cardDrop', function(event, data, bin) {
             var sgc = solitaireGameController;
 
             var parsed = data.split('-');
@@ -54,7 +54,7 @@
                 default:
                     throw "Invalid drop";
             }
-        };
+        });
 
         $scope.$on('cardDoubleClick', function(event, cardId) {
             var sgc = solitaireGameController;

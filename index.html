@@ -25,17 +25,14 @@
       <div></div>
       <foundation
         ng-repeat="foundation in game.foundations"
-        foundation="foundation"
-        drop="game.dropHandler">
+        foundation="foundation">
       </foundation>
     </div>
-    <div class="clear"></div>
     <div class="game-row bottom-game-row">
       <div ng-repeat="pile in game.piles track by $index">
         Pile {{$index}}
       </div>
     </div>
-    <div class="clear"></div>
   </div>
 </body>
 </html>
