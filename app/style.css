@@ -35,7 +35,7 @@ body {
     position: relative;
 }
 
-.game-row > div {
+.game-column {
     width: 14%;
     height: 100%;
     float: left;
