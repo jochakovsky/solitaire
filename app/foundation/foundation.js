@@ -18,9 +18,7 @@
         };
 
         Foundation.prototype.addCard = function(card) {
-            if (this.canAddCard(card)) {
-                this.cards.push(card);
-            }
+            this.cards.push(card);
         };
 
         Foundation.prototype.canRemoveCard = function(card) {
@@ -40,15 +38,11 @@
 
     app.directive('foundation', function() {
         var link = function(scope, element, attrs) {
-            element.on('dragover', function(event) {
-                event.preventDefault();
-            });
-
-            element.on('drop', function(event) {
-                event.preventDefault();
-                scope.$emit('cardDrop', event.dataTransfer.getData("text"),
-                    "foundation-" + scope.foundation.id);
-                scope.$apply();
+            $(element).droppable({
+                drop: function(event, ui) {
+                    scope.$emit('cardDrop', ui.draggable.attr("id"),
+                        "foundation-" + scope.foundation.id);
+                }
             });
         };
 

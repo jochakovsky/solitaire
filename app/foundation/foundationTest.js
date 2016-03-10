@@ -20,18 +20,15 @@ describe('foundation', function() {
         });
 
         it('should only accept an Ace as the first card', function() {
-            expect(test.addCard(new Card(4, 'H'))).toEqual(false);
-            expect(test.cards.length).toBe(0);
-
-            expect(test.addCard(new Card(1, 'H'))).toEqual(true);
-            expect(test.cards.length).toBe(1);
+            expect(test.canAddCard(new Card(4, 'H'))).toEqual(false);
+            expect(test.canAddCard(new Card(1, 'H'))).toEqual(true);
         });
 
         it('should only accept cards of the same suit as the next card', function() {
-            expect(test.addCard(new Card(1, 'H'))).toEqual(true);
-            expect(test.addCard(new Card(2, 'C'))).toEqual(false);
-            expect(test.addCard(new Card(2, 'H'))).toEqual(true);
-            expect(test.cards.length).toBe(2);
+            expect(test.canAddCard(new Card(1, 'H'))).toEqual(true);
+            test.addCard(new Card(1, 'H'));
+            expect(test.canAddCard(new Card(2, 'C'))).toEqual(false);
+            expect(test.canAddCard(new Card(2, 'H'))).toEqual(true);
         });
     });
 });

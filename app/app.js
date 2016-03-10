@@ -54,6 +54,8 @@
                 default:
                     throw "Invalid drop";
             }
+
+            $scope.$apply();
         });
 
         $scope.$on('cardDoubleClick', function(event, cardId) {
