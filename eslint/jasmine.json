@@ -1,0 +1,11 @@
+{
+    "extends": "./base.json",
+    "globals": {
+        // angular mocks
+        "module": false,
+        "inject": false
+    },
+    "env": {
+        "jasmine": true
+    }
+}

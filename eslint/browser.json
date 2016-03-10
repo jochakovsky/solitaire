@@ -1,0 +1,16 @@
+{
+    "extends": "./base.json",
+    "globals": {
+        // angular
+        "angular": false,
+
+        // jquery
+        "$": false,
+
+        // underscore
+        "_": false
+    },
+    "env": {
+        "browser": true
+    }
+}

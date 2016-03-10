@@ -2,6 +2,9 @@
   "author": "Joshua Ochakovsky <josh@ochakovsky.com>",
   "description": "I'm learning Angular by building Klondike Solitaire.",
   "devDependencies": {
+    "eslint": "^2.3.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
     "http-server": "^0.8.5",
     "jasmine": "^2.4.1",
     "karma": "^0.13.19",
