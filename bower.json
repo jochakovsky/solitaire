@@ -19,7 +19,8 @@
   "dependencies": {
     "angular": "^1.5.0",
     "underscore": "^1.8.3",
-    "jquery-ui": "^1.11.4"
+    "jquery-ui": "^1.11.4",
+    "svg-playing-cards": "https://github.com/MattCain/svg-playing-cards.git"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0"

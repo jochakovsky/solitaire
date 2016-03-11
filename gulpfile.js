@@ -16,7 +16,16 @@ var jsTestPath = ['app/**/*Test.js'];
 var jsAppPath = [jsPath[0], '!' + jsTestPath[0]];
 var sassPath = ['app/*.scss'];
 var angularTemplatesPath = ['app/**/*.html'];
-var defaultTasks = ['lint', 'lint-test', 'scripts', 'sass', 'templates'];
+var index = ['index.html'];
+var defaultTasks = [
+    'lint',
+    'lint-test',
+    'scripts',
+    'sass',
+    'templates',
+    'copy-index',
+    'copy-lib'
+];
 
 gulp.task('lint', function() {
     return gulp.src(jsAppPath)
@@ -71,6 +80,21 @@ gulp.task('sass', function() {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build/css'));
 });
+
+gulp.task('copy-index', function() {
+    return gulp.src(index)
+        .pipe(minifyHtml({
+            empty: true,
+            spare: true,
+            quotes: true
+        }))
+        .pipe(gulp.dest('build/'));
+});
+
+gulp.task('copy-lib', function() {
+    return gulp.src(['bower_components/**', 'lib/**'])
+        .pipe(gulp.dest('build/lib'));
+})
 
 gulp.task('watch', function() {
     gulp.watch(jsPath.concat(sassPath), defaultTasks);
