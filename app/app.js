@@ -1,5 +1,5 @@
 (function(){
-    var app = angular.module('solitaire', ['card', 'foundation', 'stock', 'waste']);
+    var app = angular.module('solitaire', ['card', 'foundation', 'stock', 'templates', 'waste']);
 
     app.controller('SolitaireGameController', ['Stock', 'Foundation', 'Waste', '$scope', function(Stock, Foundation, Waste, $scope) {
         var solitaireGameController = this;

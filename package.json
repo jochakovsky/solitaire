@@ -2,10 +2,13 @@
   "author": "Joshua Ochakovsky <josh@ochakovsky.com>",
   "description": "I'm learning Angular by building Klondike Solitaire.",
   "devDependencies": {
+    "add-stream": "^1.0.0",
     "eslint": "^2.3.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^2.0.0",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-ng-html2js": "^0.2.2",
     "gulp-rename": "^1.2.2",
     "gulp-ruby-sass": "^2.0.6",
     "gulp-sourcemaps": "^1.6.0",
