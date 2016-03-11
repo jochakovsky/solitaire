@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var sass = require('gulp-ruby-sass');
+var sourcemaps = require('gulp-sourcemaps');
 
 var jsPath = ['app/**/*.js'];
 var jsTestPath = ['app/**/*Test.js'];
@@ -32,9 +33,11 @@ gulp.task('lint-test', function() {
 
 gulp.task('scripts', function() {
     return gulp.src(jsAppPath)
+        .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('build/js'));
 });
 

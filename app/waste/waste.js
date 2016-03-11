@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module('waste', []);
 
-    app.factory('Waste', function(Card) {
+    app.factory('Waste', ['Card', function(Card) {
         var Waste = function() {
             //end of array is top of waste
             this.cards = [];
@@ -34,7 +34,7 @@
         };
 
         return Waste;
-    });
+    }]);
 
     app.directive('waste', function() {
         return {
