@@ -7,6 +7,7 @@ var rename = require('gulp-rename');
 var sass = require('gulp-ruby-sass');
 var sourcemaps = require('gulp-sourcemaps');
 
+var minificationSuffix = '.min';
 var jsPath = ['app/**/*.js'];
 var jsTestPath = ['app/**/*Test.js'];
 var jsAppPath = [jsPath[0], '!' + jsTestPath[0]];
@@ -35,15 +36,19 @@ gulp.task('scripts', function() {
     return gulp.src(jsAppPath)
         .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({suffix: minificationSuffix}))
         .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build/js'));
 });
 
 gulp.task('sass', function() {
-    return sass(sassPath, {style: 'compressed'})
-        .pipe(rename({suffix: '.min'}))
+    return sass(sassPath, {
+            style: 'compressed',
+            sourcemap: true
+        })
+        .pipe(rename({suffix: minificationSuffix}))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('build/css'));
 });
 
