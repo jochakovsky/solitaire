@@ -4,11 +4,13 @@ var eslint = require('gulp-eslint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var sass = require('gulp-ruby-sass');
 
-var jsPath = 'app/**/*.js';
-var jsTestPath = 'app/**/*Test.js';
-var jsAppPath = [jsPath, '!' + jsTestPath];
-var watchTasks = ['lint', 'lint-test', 'scripts'];
+var jsPath = ['app/**/*.js'];
+var jsTestPath = ['app/**/*Test.js'];
+var jsAppPath = [jsPath[0], '!' + jsTestPath[0]];
+var sassPath = ['app/*.scss'];
+var defaultTasks = ['lint', 'lint-test', 'scripts', 'sass'];
 
 gulp.task('lint', function() {
     return gulp.src(jsAppPath)
@@ -30,14 +32,20 @@ gulp.task('lint-test', function() {
 
 gulp.task('scripts', function() {
     return gulp.src(jsAppPath)
-        .pipe(concat('all.js'))
+        .pipe(concat('main.js'))
         .pipe(rename({suffix: '.min'}))
         .pipe(uglify())
-        .pipe(gulp.dest('build/'));
+        .pipe(gulp.dest('build/js'));
+});
+
+gulp.task('sass', function() {
+    return sass(sassPath, {style: 'compressed'})
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('watch', function() {
-    gulp.watch(jsPath, watchTasks);
+    gulp.watch(jsPath.concat(sassPath), defaultTasks);
 });
 
-gulp.task('default', watchTasks.concat(['watch']));
+gulp.task('default', defaultTasks.concat(['watch']));
