@@ -15,13 +15,17 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.js',
-      'bower_components/underscore/underscore.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/jquery-ui/jquery-ui.js',
-      'app/**/*.js',
-      'app/**/*.html'
+      //getting indecipherable error messages with minified angular, will use
+      //regular for now. would like to switch to minified so tests can reflect
+      //production more accurately
+      'build/lib/angular/angular.js',
+      'build/lib/underscore/underscore-min.js',
+      'build/lib/angular-mocks/angular-mocks.js',
+      'build/lib/jquery/dist/jquery.min.js',
+      'build/lib/jquery-ui/jquery-ui.min.js',
+      'build/js/templates.min.js',
+      'build/js/main.min.js',
+      'app/**/*Test.js'
     ],
 
 
@@ -33,17 +37,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      '**/*.html': ['ng-html2js']
-    },
-
-
-    ngHtml2JsPreprocessor: {
-      // Folder structure for this project is app/foo/bar.html, where foo is
-      // the name of the Angular module defined in app/foo/foo.js. This will
-      // make bar.html available in the foo-templates module for testing.
-      moduleName: function(htmlPath, originalPath) {
-        return htmlPath.split('/')[1] + '-templates';
-      }
+      '**/*.js': ['sourcemap']
     },
 
     // test results reporter to use
