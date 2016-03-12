@@ -9,6 +9,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var ngHtml2Js = require('gulp-ng-html2js');
 var addStream = require('add-stream');
 var minifyHtml = require("gulp-minify-html");
+var ghPages = require('gulp-gh-pages');
 
 var minificationSuffix = '.min';
 var jsPath = ['app/**/*.js'];
@@ -107,3 +108,10 @@ gulp.task('watch', function() {
 gulp.task('build', defaultTasks)
 
 gulp.task('default', ['build', 'watch']);
+
+// ONE-OFF TASKS
+
+gulp.task('deploy', function() {
+    return gulp.src(buildDirectory + '**/*')
+        .pipe(ghPages());
+});
