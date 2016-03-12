@@ -3,6 +3,7 @@
   "description": "I'm learning Angular by building Klondike Solitaire.",
   "devDependencies": {
     "add-stream": "^1.0.0",
+    "bower": "^1.7.7",
     "eslint": "^2.3.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
@@ -25,8 +26,8 @@
   "name": "SolitaireWithAngular",
   "repository": "jochakovsky/solitaire",
   "scripts": {
-    "postinstall": "bower install",
-    "start": "http-server -a localhost -p 8000 -c-1",
+    "postinstall": "bower install && gulp build",
+    "start": "http-server ./build -a localhost -p 8000 -c-1",
     "test": "karma start karma.conf.js"
   }
 }

@@ -16,7 +16,8 @@ var jsTestPath = ['app/**/*Test.js'];
 var jsAppPath = [jsPath[0], '!' + jsTestPath[0]];
 var sassPath = ['app/*.scss'];
 var angularTemplatesPath = ['app/**/*.html'];
-var index = ['index.html'];
+var indexPath = ['index.html'];
+var buildDirectory = './build/';
 var defaultTasks = [
     'lint',
     'lint-test',
@@ -52,7 +53,7 @@ gulp.task('scripts', function() {
             .pipe(rename({suffix: minificationSuffix}))
             .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('build/js'));
+        .pipe(gulp.dest(buildDirectory + 'js'));
 });
 
 gulp.task('templates', function() {
@@ -68,7 +69,7 @@ gulp.task('templates', function() {
         }))
         .pipe(concat('templates.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('build/js'));
+        .pipe(gulp.dest(buildDirectory + 'js'));
 });
 
 gulp.task('sass', function() {
@@ -78,26 +79,31 @@ gulp.task('sass', function() {
         })
         .pipe(rename({suffix: minificationSuffix}))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('build/css'));
+        .pipe(gulp.dest(buildDirectory + 'css'));
 });
 
 gulp.task('copy-index', function() {
-    return gulp.src(index)
+    return gulp.src(indexPath)
         .pipe(minifyHtml({
             empty: true,
             spare: true,
             quotes: true
         }))
-        .pipe(gulp.dest('build/'));
+        .pipe(gulp.dest(buildDirectory));
 });
 
 gulp.task('copy-lib', function() {
     return gulp.src(['bower_components/**', 'lib/**'])
-        .pipe(gulp.dest('build/lib'));
+        .pipe(gulp.dest(buildDirectory + 'lib'));
 })
 
 gulp.task('watch', function() {
-    gulp.watch(jsPath.concat(sassPath), defaultTasks);
+    gulp.watch(jsPath
+        .concat(sassPath)
+        .concat(angularTemplatesPath)
+        .concat(indexPath), defaultTasks);
 });
 
-gulp.task('default', defaultTasks.concat(['watch']));
+gulp.task('build', defaultTasks)
+
+gulp.task('default', ['build', 'watch']);
