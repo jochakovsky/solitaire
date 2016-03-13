@@ -27,6 +27,7 @@
   "name": "SolitaireWithAngular",
   "repository": "jochakovsky/solitaire",
   "scripts": {
+    "preinstall": "bundle install",
     "postinstall": "bower install && gulp build",
     "start": "http-server ./build -a localhost -p 8000 -c-1",
     "test": "karma start karma.conf.js --single-run"
