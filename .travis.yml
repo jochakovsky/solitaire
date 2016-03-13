@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "5"
-script: bash ./deploy.sh
+after_success: bash ./deploy.sh
 env:
   global:
   - GH_REF: github.com/jochakovsky/solitaire.git
