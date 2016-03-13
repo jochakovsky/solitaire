@@ -22,7 +22,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "phantomjs-prebuilt": "^2.1.4"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "name": "SolitaireWithAngular",
   "repository": "jochakovsky/solitaire",
   "scripts": {
