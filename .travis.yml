@@ -1,3 +1,8 @@
 language: node_js
 node_js:
   - "5"
+script: bash ./deploy.sh
+env:
+  global:
+  - GH_REF: github.com/jochakovsky/solitaire.git
+  - secure: "nJ/uDNg/VoUk2S1+0dGUs8IJysLg5FBAn3hGU9Tr23A1B3hNtAfhMnGxEKOx8+0RIUK9aEPU77FSZPmGcvdHbpXTvlRyus+KzZFRgSaISZOScW7/b3NXrmEBkMR9H6Adwq7NtqOOsu5wMsHru7gtAWshwwZBEfToedm8diowJGum1ipLq8bibQeLqGdjpi/iSGJGUgNrz86OypPM3t23Td3/f7/teyl8cKdFfyq99sv94zxVoFPk+sA9KtdgVKvheF5l8jnnHnjKHjdbHf0o91pHGIV7wppLX38El4LBQlBXxV1tOqpoYx8jdsf57xdERQ6zXuJwYt9MKzoaUqsE3Zewffbre/yi5baXYpTp7mrFN8z+V5QLRH742DpYnAxBuN52aCuabCs1rS0yamvwsbG7Uvm1fIZkMVYLN1Ys4EVp8gOjiE6JnxW3hF1ysWyFtUZUVHb9O4GKl8lcZ1ggWWlnH5ffdV3XuRc0W4nKOlpMVbFUjABbtJz/pJtOPuXbFYlk3Yfoo2+mvMWX/06kR32n/dczVHtDoWBt4yCG0mTGtMe3XGymyx7uSSMIRFcNjXTrMbL720W0HlNT+7fLGpeDjN5xyXUOymIJaUmMjlb2AjzN1Hd49/wkK6GjNs0esC7NXzOFUD3qrDc/M8+P1xtRo/F0lrU5pH5khgW0rrY="

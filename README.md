@@ -8,8 +8,3 @@ This is my attempt to create a Klondike Solitaire clone using Angular.
 
 -   Node.js
 -   Ruby with Bundler
-
-## Install
-
-```npm install
-```
