@@ -1,3 +1,6 @@
+$card-width: 100px;
+$card-height: 145px;
+
 body {
     background-color: green;
 }
@@ -7,8 +10,8 @@ body {
 }
 
 *[class^="pcard-"], *[class*=" pcard-"] {
-    width: 100px;
-    height: 145px;
+    width: $card-width;
+    height: $card-height;
     display: block;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -27,7 +30,7 @@ body {
 }
 
 .game-column {
-    width: 100px;
+    width: $card-width;
     margin: 5px;
     vertical-align: top;
     border:1px solid black;
