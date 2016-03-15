@@ -61,6 +61,8 @@ module.exports = function(config) {
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
+    // extend file watching delay to allow for gulp build process to complete
+    autoWatchBatchDelay: 1000,
 
 
     // start these browsers
