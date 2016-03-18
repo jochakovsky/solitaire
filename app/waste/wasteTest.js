@@ -74,9 +74,14 @@ describe('waste', function() {
             var moveReturn = test.maybeRemoveCards(testCard2);
             expect(moveReturn.cards.length).toEqual(1);
 
-            expect(function() {
+            var nextRemoval = function() {
                 test.maybeRemoveCards(testCard1);
-            }).toThrow("Waste waiting for card removal to be completed.");
+            }
+
+            expect(nextRemoval).toThrow("Waste waiting for card removal to be completed.");
+
+            moveReturn.onMove();
+            expect(nextRemoval).not.toThrow();
         });
     });
 });

@@ -49,7 +49,7 @@
 
             switch (binObject) {
                 case 'foundation':
-                    card.moveTo(sgc.foundations[binId]);
+                    sgc.foundations[binId].maybeAddCards(card.location.maybeRemoveCards(card));
                     break;
                 default:
                     throw "Invalid drop";
@@ -62,7 +62,7 @@
             var sgc = solitaireGameController;
             var card = sgc.cardLookup[cardId];
             for (var i = 0; i < sgc.foundations.length; i++) {
-                if (card.moveTo(sgc.foundations[i])) {
+                if (sgc.foundations[i].maybeAddCards(card.location.maybeRemoveCards(card))) {
                     break;
                 }
             }

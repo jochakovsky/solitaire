@@ -49,7 +49,7 @@
                     waste.cards.pop();
                     waste.lock = false;
                 };
-                waste.onReturn = function() {
+                move.onReturn = function() {
                     waste.lock = false;
                 }
             }
@@ -60,6 +60,7 @@
         Waste.prototype.maybeAddCards = function(move) {
             if (move.cards.length === 1) {
                 this.cards.push(move.cards[0]);
+                move.cards[0].location = this;
                 move.onMove();
                 return true;
             }
