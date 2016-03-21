@@ -5,7 +5,7 @@ describe('foundation', function() {
     });
 
     describe('Foundation', function() {
-        var Foundation, Card, test;
+        var Foundation, Card, test, move;
 
         beforeEach(inject(function(_Foundation_, _Card_) {
             Foundation = _Foundation_;
