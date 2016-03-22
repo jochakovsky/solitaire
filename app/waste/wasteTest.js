@@ -43,22 +43,31 @@ describe('waste', function() {
             expect(test.cards[test.cards.length - 1]).toEqual(testCard2);
         });
 
-        it('should only allow the top card to be removed', function() {
+        it('should only allow the top or bottom card to be removed', function() {
             //set up waste with two cards
             var testCard1 = new Card(3, 'D'),
-                testCard2 = new Card(9, 'C');
+                testCard2 = new Card(9, 'C'),
+                testCard3 = new Card(11, 'S');
             move.cards = [testCard1];
             expect(test.maybeAddCards(move)).toEqual(true);
             move.cards = [testCard2];
             expect(test.maybeAddCards(move)).toEqual(true);
-            expect(test.cards.length).toEqual(2);
+            move.cards = [testCard3];
+            expect(test.maybeAddCards(move)).toEqual(true);
+            expect(test.cards.length).toEqual(3);
 
-            var moveReturn = test.maybeRemoveCards(testCard1);
+            var moveReturn = test.maybeRemoveCards(testCard2);
             expect(moveReturn.cards.length).toEqual(0);
 
-            moveReturn = test.maybeRemoveCards(testCard2);
+            moveReturn = test.maybeRemoveCards(testCard3);
             expect(moveReturn.cards.length).toEqual(1);
-            expect(moveReturn.cards[moveReturn.cards.length - 1]).toEqual(testCard2);
+            expect(moveReturn.cards[moveReturn.cards.length - 1]).toEqual(testCard3);
+            moveReturn.onReturn();
+
+            // This operation occurs when waste is emptied to replenish stock
+            moveReturn = test.maybeRemoveCards(testCard1);
+            expect(moveReturn.cards.length).toEqual(3);
+            expect(moveReturn.cards).toEqual([testCard1, testCard2, testCard3]);
         });
 
         it('should throw if another removal is pending', function() {

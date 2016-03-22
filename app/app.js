@@ -4,23 +4,9 @@
     app.controller('SolitaireGameController', ['Stock', 'Foundation', 'Waste', '$scope', function(Stock, Foundation, Waste, $scope) {
         var solitaireGameController = this;
         
-        var stock = new Stock();
+        this.stock = new Stock();
         this.waste = new Waste();
-
-        this.stockHasCardsLeft = true;
-        this.cardLookup = stock.cardLookup;
-
-        this.showNextStockCard = function() {
-            if (stock.topCard()) {
-                stock.topCard().moveTo(this.waste);
-            }
-            else {
-                while (this.waste.topCard()) {
-                    this.waste.topCard().moveTo(stock);
-                }
-            }
-            this.stockHasCardsLeft = stock.topCard() ? true : false;
-        };
+        this.cardLookup = this.stock.cardLookup;
 
         var numberOfFoundations = 4;
         this.foundations = new Array(4);
@@ -66,6 +52,22 @@
                     break;
                 }
             }
+            $scope.$apply();
+        });
+
+        $scope.$on('drawCard', function(event, cardId) {
+            var sgc = solitaireGameController;
+            // draw a card if there are cards left
+            if (cardId === 'EMPTY') {
+                var move = sgc.waste.maybeRemoveCards(sgc.waste.cards[0]);
+                sgc.stock.maybeAddCards(move);
+            }
+            // otherwise, move all of waste cards back to stock
+            else {
+                var card = sgc.cardLookup[cardId];
+                sgc.waste.maybeAddCards(card.location.maybeRemoveCards(card));
+            }
+
             $scope.$apply();
         });
     }]);

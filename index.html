@@ -9,10 +9,7 @@
     <div class="game" ng-controller="SolitaireGameController as game">
       <div class="game-row top-game-row">
         <div class="game-column">
-          <div ng-click="game.showNextStockCard()">
-            <span class="pcard-bottom-of-stack"></span>
-            <span class="pcard-back stock-card" ng-if="game.stockHasCardsLeft"></span>
-          </div>
+          <stock stock="game.stock"></stock>
         </div>
         <div class="game-column">
           <waste waste="game.waste"></waste>
@@ -22,9 +19,14 @@
           <foundation foundation="foundation"></foundation>
         </div>
       </div>
+<!--       <div>
+        <div>Stock: <span ng-repeat="card in game.stock.cards">({{card.rank}}|{{card.suit}})</span></div>
+        <div>Waste: <span ng-repeat="card in game.waste.cards">({{card.rank}}|{{card.suit}})</span></div>
+      </div> -->
       <div class="game-row bottom-game-row">
         <div ng-repeat="pile in game.piles track by $index" class="game-column">
-          Pile {{$index}}
+          Pile {{$index}}<br>
+          (placeholder)
         </div>
       </div>
     </div>

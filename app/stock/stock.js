@@ -16,8 +16,10 @@
                     cardId++;
                 }, this);
             }
-            this.cardLookup = this.cards;
-            this.shuffle();
+            this.cardLookup = this.cards.slice();
+            this.cards = _.shuffle(this.cards);
+
+            this.lock = false;
         };
 
         Stock.prototype.canAddCard = function(card) {
@@ -40,10 +42,73 @@
             return this.cards[this.cards.length - 1];
         };
 
-        Stock.prototype.shuffle = function() {
-            this.cards = _.shuffle(this.cards);
-        };
+        Stock.prototype.maybeRemoveCards = function(card) {
+            var stock = this;
+            if (stock.lock) {
+                throw "stock waiting for card removal to be completed.";
+            }
+
+            var move = {
+                cards: [],
+                onMove: function() {},
+                onReturn: function() {}
+            };
+
+            if (card == this.cards[this.cards.length - 1]) {
+                stock.lock = true;
+                move.cards.push(stock.cards[stock.cards.length - 1]);
+                move.onMove = function() {
+                    stock.cards.pop();
+                    stock.lock = false;
+                };
+                move.onReturn = function() {
+                    stock.lock = false;
+                }
+            }
+
+            return move;
+        }
+
+        Stock.prototype.maybeAddCards = function(move) {
+            var stock = this;
+
+            if (stock.cards.length === 0
+                && move.cards.length > 0) {
+                stock.cards = move.cards.slice().reverse();
+                stock.cards.forEach(function(card) {
+                    card.location = stock;
+                })
+                move.onMove();
+                return true;
+            }
+            else {
+                move.onReturn();
+                return false;
+            }
+        }
 
         return Stock;
     }]);
+
+    app.directive('stock', function() {
+
+        var link = function(scope, element, attrs) {
+            element.on('click', function(event) {
+                var cards = scope.stock.cards;
+                scope.$emit('drawCard', cards.length > 0
+                    ? cards[cards.length - 1].id
+                    : 'EMPTY');
+            });
+        };
+
+        return {
+            link: link,
+            replace: true,
+            restrict: 'E',
+            scope: {
+                stock: '='
+            },
+            templateUrl: 'app/stock/stock.html'
+        };
+    });
 })();

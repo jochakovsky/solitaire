@@ -42,13 +42,28 @@
                 onReturn: function() {}
             };
 
-            if (card == this.cards[this.cards.length - 1]) {
+            if (waste.cards.length === 0 || !card) {
+                return move;
+            }
+
+            if (card === waste.cards[waste.cards.length - 1]) {
                 waste.lock = true;
                 move.cards.push(waste.cards[waste.cards.length - 1]);
                 move.onMove = function() {
                     waste.cards.pop();
                     waste.lock = false;
                 };
+                move.onReturn = function() {
+                    waste.lock = false;
+                }
+            }
+            else if (card === waste.cards[0]) {
+                waste.lock = true;
+                move.cards = waste.cards.slice();
+                move.onMove = function() {
+                    waste.cards = [];
+                    waste.lock = false;
+                }
                 move.onReturn = function() {
                     waste.lock = false;
                 }
