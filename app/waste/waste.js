@@ -8,28 +8,6 @@
             this.lock = false;
         };
 
-        Waste.prototype.empty = function() {
-            var returnCards = this.cards;
-            this.cards = [];
-            return returnCards;
-        };
-
-        Waste.prototype.canAddCard = function(card) {
-            return true;
-        };
-
-        Waste.prototype.addCard = function(card) {
-            this.cards.push(card);
-        };
-
-        Waste.prototype.canRemoveCard = function(card) {
-            return card == this.cards[this.cards.length - 1];
-        };
-
-        Waste.prototype.removeCard = function(card) {
-            return this.cards.pop();
-        };
-
         Waste.prototype.maybeRemoveCards = function(card) {
             var waste = this;
             if (waste.lock) {
@@ -84,10 +62,6 @@
                 return false;
             }
         }
-
-        Waste.prototype.topCard = function() {
-            return this.cards[this.cards.length - 1];
-        };
 
         return Waste;
     }]);

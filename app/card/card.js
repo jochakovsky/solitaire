@@ -66,23 +66,6 @@
             return this.suit == 'D' || this.suit == 'H';
         };
 
-        Card.prototype.moveTo = function(destination) {
-            // alert("Moving card " + this.id + " onto thing " + destination.id);
-            if (this.location.canRemoveCard(this) && destination.canAddCard(this)) {
-                this.location.removeCard(this);
-                this.location = destination;
-                this.location.addCard(this);
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-        Card.prototype.moveToAppropriateFoundation = function() {
-            alert("Double click to move to foundation not implemented.");
-        }
-
         Card.prototype.minRank = 1;
         Card.prototype.maxRank = 13;
         Card.prototype.suits = ['C', 'D', 'H', 'S'];

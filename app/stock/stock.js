@@ -22,26 +22,6 @@
             this.lock = false;
         };
 
-        Stock.prototype.canAddCard = function(card) {
-            return true;
-        };
-
-        Stock.prototype.addCard = function(card) {
-            this.cards.push(card);
-        };
-
-        Stock.prototype.canRemoveCard = function(card) {
-            return this.cards.length > 0;
-        };
-
-        Stock.prototype.removeCard = function(card) {
-            return this.cards.pop();
-        };
-
-        Stock.prototype.topCard = function() {
-            return this.cards[this.cards.length - 1];
-        };
-
         Stock.prototype.maybeRemoveCards = function(card) {
             var stock = this;
             if (stock.lock) {
