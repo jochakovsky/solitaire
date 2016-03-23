@@ -34,7 +34,7 @@
                 onReturn: function() {}
             };
 
-            if (card == this.cards[this.cards.length - 1]) {
+            if (card === this.cards[this.cards.length - 1]) {
                 stock.lock = true;
                 move.cards.push(stock.cards[stock.cards.length - 1]);
                 move.onMove = function() {
