@@ -1,5 +1,6 @@
 $card-width: 100px;
 $card-height: 145px;
+$card-peek: $card-height - 35px;
 
 body {
     background-color: green;
@@ -7,6 +8,11 @@ body {
 
 .pcard-bottom-of-stack {
     background-color: lightgreen;
+}
+
+.pcard-bottom-of-pile {
+    background-color: tomato;
+    position: absolute;
 }
 
 *[class^="pcard-"], *[class*=" pcard-"] {
@@ -44,5 +50,9 @@ body {
 }
 
 .pile-card {
-    margin-bottom: -$card-height + 35px;
+    margin-bottom: -$card-peek;
+}
+
+.pile {
+    height: $card-height + ($card-peek * 12);
 }
