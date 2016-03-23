@@ -9,8 +9,7 @@
             this.cards = [];
 
             var cardId = 0;
-            // for (var rank = Card.minRank; rank <= Card.maxRank; rank++) {
-            for (var rank = sampleCard.minRank; rank <= 4; rank++) {
+            for (var rank = sampleCard.minRank; rank <= sampleCard.maxRank; rank++) {
                 sampleCard.suits.forEach(function(suit) {
                     this.cards[cardId] = (new Card(rank, suit, cardId, this));
                     cardId++;

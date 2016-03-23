@@ -94,7 +94,17 @@
     }]);
 
     app.directive('pile', function() {
+        var link = function(scope, element, attrs) {
+            $(element).droppable({
+                drop: function(event, ui) {
+                    scope.$emit('cardDrop', ui.draggable.attr("id"),
+                        "pile-" + scope.pile.id);
+                }
+            });
+        };
+
         return {
+            link: link,
             replace: true,
             restrict: 'E',
             scope: {

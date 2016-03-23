@@ -24,9 +24,8 @@
         <div>Waste: <span ng-repeat="card in game.waste.cards">({{card.rank}}|{{card.suit}})</span></div>
       </div> -->
       <div class="game-row bottom-game-row">
-        <div ng-repeat="pile in game.piles track by $index" class="game-column">
-          Pile {{$index}}<br>
-          (placeholder)
+        <div ng-repeat="pile in game.piles" class="game-column">
+          <pile pile="pile"></pile>
         </div>
       </div>
     </div>

@@ -1,20 +1,38 @@
 (function(){
-    var app = angular.module('solitaire', ['card', 'foundation', 'stock', 'templates', 'waste', 'pile']);
+    var app = angular.module('solitaire', [
+        'card',
+        'foundation',
+        'stock',
+        'templates',
+        'waste',
+        'pile'
+    ]);
 
-    app.controller('SolitaireGameController', ['Stock', 'Foundation', 'Waste', '$scope', function(Stock, Foundation, Waste, $scope) {
+    app.controller('SolitaireGameController', [
+        'Stock',
+        'Foundation',
+        'Waste',
+        'Pile',
+        '$scope',
+        function(Stock, Foundation, Waste, Pile, $scope) {
         var solitaireGameController = this;
+        var numberOfFoundations = 4;
+        var numberOfPiles = 7;
         
         this.stock = new Stock();
         this.waste = new Waste();
         this.cardLookup = this.stock.cardLookup;
 
-        var numberOfFoundations = 4;
-        this.foundations = new Array(4);
+        
+        this.foundations = new Array(numberOfFoundations);
         for (var i = 0; i < numberOfFoundations; i++) {
             this.foundations[i] = new Foundation(i);
         }
 
-        this.piles = new Array(7);
+        this.piles = new Array(numberOfPiles);
+        for (i = 0; i < numberOfPiles; i++) {
+            this.piles[i] = new Pile(i);
+        }
 
         $scope.$on('cardDrop', function(event, data, bin) {
             var sgc = solitaireGameController;
@@ -36,6 +54,9 @@
             switch (binObject) {
                 case 'foundation':
                     sgc.foundations[binId].maybeAddCards(card.location.maybeRemoveCards(card));
+                    break;
+                case 'pile':
+                    sgc.piles[binId].maybeAddCards(card.location.maybeRemoveCards(card));
                     break;
                 default:
                     throw "Invalid drop";
