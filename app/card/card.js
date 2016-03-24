@@ -1,35 +1,6 @@
 (function(){
     var app = angular.module('card', [ ]);
 
-    app.filter('cardFilename', function() {
-        return function(card) {
-            var filename = '';
-            if (card) {
-                switch (card.rank) {
-                    case 1:
-                        filename += 'A';
-                        break;
-                    case 11:
-                        filename += 'J';
-                        break;
-                    case 12:
-                        filename += 'Q';
-                        break;
-                    case 13:
-                        filename += 'K';
-                        break;
-                    default:
-                        filename += card.rank;
-                }
-                filename += card.suit;
-            }
-            else {
-                filename = "Joker1";
-            }
-            return filename;
-        };
-    });
-
     app.directive('card', function() {
 
         var link = function(scope, element, attrs) {
@@ -41,6 +12,12 @@
                 revert: true,
                 zIndex: 10
             });
+
+            scope.class = function() {
+                return scope.card.faceUp
+                    ? scope.card.shortName()
+                    : 'pcard-back';
+            }
         };
 
         return {
@@ -60,6 +37,7 @@
             this.suit = suit;
             this.id = id;
             this.location = location;
+            this.faceUp = true;
         };
 
         Card.prototype.isRed = function() {
@@ -69,6 +47,28 @@
         Card.prototype.minRank = 1;
         Card.prototype.maxRank = 13;
         Card.prototype.suits = ['C', 'D', 'H', 'S'];
+
+        Card.prototype.shortName = function() {
+            var name = 'pcard-';
+            switch (this.rank) {
+                case 1:
+                    name += 'A';
+                    break;
+                case 11:
+                    name += 'J';
+                    break;
+                case 12:
+                    name += 'Q';
+                    break;
+                case 13:
+                    name += 'K';
+                    break;
+                default:
+                    name += this.rank;
+            }
+            name += this.suit;
+            return name.toLowerCase();
+        }
 
         return Card;
     });

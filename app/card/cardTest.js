@@ -32,59 +32,23 @@ describe('card', function() {
         });
     });
 
-    describe('cardFilename', function() {
-        var Card, cardFilename;
-
-        beforeEach(inject(function(_Card_) {
-            Card = _Card_;
-        }));
-
-        beforeEach(inject(function(cardFilenameFilter) {
-            cardFilename = cardFilenameFilter;
-        }))
-
-        it('should have the correct default filename', function() {
-            expect(cardFilename(undefined)).toEqual('Joker1');
-        });
-
-        it('should treat aces correctly', function() {
-            var card = new Card(1, 'H');
-            expect(cardFilename(card)).toEqual('AH');
-        });
-
-        it('should treat face cards correctly', function() {
-            var card = new Card(11, 'H');
-            expect(cardFilename(card)).toEqual('JH');
-
-            card = new Card(12, 'H');
-            expect(cardFilename(card)).toEqual('QH');
-
-            card = new Card(13, 'H');
-            expect(cardFilename(card)).toEqual('KH');
-        });
-
-        it('should treat number cards correctly', function() {
-            var card = new Card(8, 'C');
-            expect(cardFilename(card)).toEqual('8C');
-        });
-    });
-
     describe('card element directive', function() {
-        var $compile, $rootScope, scope;
+        var $compile, $rootScope, scope, Card;
 
         // Store references to $rootScope and $compile
         // so they are available to all tests in this describe block
-        beforeEach(inject(function(_$compile_, _$rootScope_){
+        beforeEach(inject(function(_$compile_, _$rootScope_, _Card_){
             // The injector unwraps the underscores (_) from around the parameter names when matching
             $compile = _$compile_;
             $rootScope = _$rootScope_;
             scope = $rootScope.$new();
+            Card = _Card_;
         }));
 
         it('Replaces the element with the appropriate content', function() {
             // $rootScope.testCard = {rank: 4, suit: "H"};
             // Compile a piece of HTML containing the directive
-            scope.testCard = {rank: 4, suit: "H"};
+            scope.testCard = new Card(4 ,'H');
             var element = $compile("<card card=\"testCard\"></card>")(scope);
             
             // fire all the watches, so the scope expression {{1 + 1}} will be evaluated

@@ -1,4 +1,5 @@
-<div class="pile">
+<div class="pile" ng-click="pile.revealCard()">
     <div class="pcard-bottom-of-pile"></div>
+    <card ng-repeat="card in pile.faceDownCards" card="card" class="pile-card"></card>
     <card ng-repeat="card in pile.cards" card="card" class="pile-card"></card>
 </div>

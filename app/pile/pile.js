@@ -4,11 +4,34 @@
     app.factory('Pile', ['Card', function(Card) {
         var sampleCard = new Card();
 
-        var Pile = function(id) {
-            this.cards = [];
-            this.id = id;
-            this.lock = false;
+        var Pile = function(faceDownCards, id) {
+            var pile = this;
+
+            if (faceDownCards) {
+                pile.faceDownCards = faceDownCards.slice();
+                pile.faceDownCards.forEach(function(card) {
+                    card.location = pile;
+                    card.faceUp = false;
+                });
+            }
+            else {
+                pile.faceDownCards = [];
+            }
+
+            pile.cards = [];
+            pile.id = id;
+            pile.lock = false;
+
+            pile.revealCard();
         };
+
+        Pile.prototype.revealCard = function() {
+            if (this.faceDownCards.length > 0 && this.cards.length === 0) {
+                var card = this.faceDownCards.pop();
+                card.faceUp = true;
+                this.cards.push(card);
+            }
+        }
 
         Pile.prototype.maybeRemoveCards = function(card) {
             var pile = this;

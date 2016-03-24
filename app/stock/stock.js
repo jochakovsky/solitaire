@@ -3,12 +3,13 @@
 
     app.factory('Stock', ['Card', function(Card) {
         var Stock = function(cards) {
+            var stock = this;
             //end of array is top of stock
-            this.cards = cards.slice();
-            this.cards.forEach(function(card) {
-                card.location = this;
-            }, this);
-            this.lock = false;
+            stock.cards = cards.slice();
+            stock.cards.forEach(function(card) {
+                card.location = stock;
+            });
+            stock.lock = false;
         };
 
         Stock.prototype.maybeRemoveCards = function(card) {

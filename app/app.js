@@ -26,25 +26,25 @@
         vm.cardLookup = [];
         for (var rank = sampleCard.minRank; rank <= sampleCard.maxRank; rank++) {
             sampleCard.suits.forEach(function(suit) {
-                vm.cardLookup[cardId] = (new Card(rank, suit, cardId, undefined));
+                vm.cardLookup.push(new Card(rank, suit, cardId, undefined));
                 cardId++;
             });
         }
 
         var cardsToDeal = _.shuffle(vm.cardLookup.slice());
 
+        vm.piles = new Array(numberOfPiles);
+        for (i = 0; i < numberOfPiles; i++) {
+            vm.piles[i] = new Pile(cardsToDeal.splice(0, i + 1), i);
+        }
+
         //for now, all 52 cards go to the stock
-        vm.stock = new Stock(cardsToDeal.splice(0, 52));
+        vm.stock = new Stock(cardsToDeal);
         vm.waste = new Waste();
 
         vm.foundations = new Array(numberOfFoundations);
         for (var i = 0; i < numberOfFoundations; i++) {
             vm.foundations[i] = new Foundation(i);
-        }
-
-        vm.piles = new Array(numberOfPiles);
-        for (i = 0; i < numberOfPiles; i++) {
-            vm.piles[i] = new Pile(i);
         }
 
         $scope.$on('cardDrop', function(event, data, bin) {
