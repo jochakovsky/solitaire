@@ -16,7 +16,7 @@ var jsTestPath = ['app/**/*Test.js'];
 var jsAppPath = [jsPath[0], '!' + jsTestPath[0]];
 var sassPath = ['app/*.scss'];
 var angularTemplatesPath = ['app/**/*.html'];
-var indexPath = ['index.html'];
+var indexPath = ['app/index.html'];
 var buildDirectory = './build/';
 var defaultTasks = [
     'lint',
