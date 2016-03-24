@@ -13,30 +13,41 @@
         'Foundation',
         'Waste',
         'Pile',
+        'Card',
         '$scope',
-        function(Stock, Foundation, Waste, Pile, $scope) {
-        var solitaireGameController = this;
+        function(Stock, Foundation, Waste, Pile, Card, $scope) {
+        var vm = this;
+
         var numberOfFoundations = 4;
         var numberOfPiles = 7;
-        
-        this.stock = new Stock();
-        this.waste = new Waste();
-        this.cardLookup = this.stock.cardLookup;
 
-        
-        this.foundations = new Array(numberOfFoundations);
-        for (var i = 0; i < numberOfFoundations; i++) {
-            this.foundations[i] = new Foundation(i);
+        var sampleCard = new Card();
+        var cardId = 0;
+        vm.cardLookup = [];
+        for (var rank = sampleCard.minRank; rank <= sampleCard.maxRank; rank++) {
+            sampleCard.suits.forEach(function(suit) {
+                vm.cardLookup[cardId] = (new Card(rank, suit, cardId, undefined));
+                cardId++;
+            });
         }
 
-        this.piles = new Array(numberOfPiles);
+        var cardsToDeal = _.shuffle(vm.cardLookup.slice());
+
+        //for now, all 52 cards go to the stock
+        vm.stock = new Stock(cardsToDeal.splice(0, 52));
+        vm.waste = new Waste();
+
+        vm.foundations = new Array(numberOfFoundations);
+        for (var i = 0; i < numberOfFoundations; i++) {
+            vm.foundations[i] = new Foundation(i);
+        }
+
+        vm.piles = new Array(numberOfPiles);
         for (i = 0; i < numberOfPiles; i++) {
-            this.piles[i] = new Pile(i);
+            vm.piles[i] = new Pile(i);
         }
 
         $scope.$on('cardDrop', function(event, data, bin) {
-            var sgc = solitaireGameController;
-
             var parsed = data.split('-');
             var dropObject = parsed[0];
             var dropId = parseInt(parsed[1]);
@@ -49,14 +60,14 @@
                 throw "Invalid drop";
             }
 
-            var card = sgc.cardLookup[dropId];
+            var card = vm.cardLookup[dropId];
 
             switch (binObject) {
                 case 'foundation':
-                    sgc.foundations[binId].maybeAddCards(card.location.maybeRemoveCards(card));
+                    vm.foundations[binId].maybeAddCards(card.location.maybeRemoveCards(card));
                     break;
                 case 'pile':
-                    sgc.piles[binId].maybeAddCards(card.location.maybeRemoveCards(card));
+                    vm.piles[binId].maybeAddCards(card.location.maybeRemoveCards(card));
                     break;
                 default:
                     throw "Invalid drop";
@@ -66,10 +77,9 @@
         });
 
         $scope.$on('cardDoubleClick', function(event, cardId) {
-            var sgc = solitaireGameController;
-            var card = sgc.cardLookup[cardId];
-            for (var i = 0; i < sgc.foundations.length; i++) {
-                if (sgc.foundations[i].maybeAddCards(card.location.maybeRemoveCards(card))) {
+            var card = vm.cardLookup[cardId];
+            for (var i = 0; i < vm.foundations.length; i++) {
+                if (vm.foundations[i].maybeAddCards(card.location.maybeRemoveCards(card))) {
                     break;
                 }
             }
@@ -77,16 +87,15 @@
         });
 
         $scope.$on('drawCard', function(event, cardId) {
-            var sgc = solitaireGameController;
             // draw a card if there are cards left
             if (cardId === 'EMPTY') {
-                var move = sgc.waste.maybeRemoveCards(sgc.waste.cards[0]);
-                sgc.stock.maybeAddCards(move);
+                var move = vm.waste.maybeRemoveCards(vm.waste.cards[0]);
+                vm.stock.maybeAddCards(move);
             }
             // otherwise, move all of waste cards back to stock
             else {
-                var card = sgc.cardLookup[cardId];
-                sgc.waste.maybeAddCards(card.location.maybeRemoveCards(card));
+                var card = vm.cardLookup[cardId];
+                vm.waste.maybeAddCards(card.location.maybeRemoveCards(card));
             }
 
             $scope.$apply();

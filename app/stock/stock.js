@@ -2,22 +2,12 @@
     var app = angular.module('stock', ['card']);
 
     app.factory('Stock', ['Card', function(Card) {
-        var Stock = function() {
-            var sampleCard = new Card();
-
+        var Stock = function(cards) {
             //end of array is top of stock
-            this.cards = [];
-
-            var cardId = 0;
-            for (var rank = sampleCard.minRank; rank <= sampleCard.maxRank; rank++) {
-                sampleCard.suits.forEach(function(suit) {
-                    this.cards[cardId] = (new Card(rank, suit, cardId, this));
-                    cardId++;
-                }, this);
-            }
-            this.cardLookup = this.cards.slice();
-            this.cards = _.shuffle(this.cards);
-
+            this.cards = cards.slice();
+            this.cards.forEach(function(card) {
+                card.location = this;
+            }, this);
             this.lock = false;
         };
 
