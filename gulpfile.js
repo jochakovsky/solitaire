@@ -9,6 +9,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var ngHtml2Js = require('gulp-ng-html2js');
 var addStream = require('add-stream');
 var minifyHtml = require("gulp-minify-html");
+var Server = require('karma').Server;
 
 var minificationSuffix = '.min';
 var jsPath = ['app/**/*.js'];
@@ -18,15 +19,6 @@ var sassPath = ['app/*.scss'];
 var angularTemplatesPath = ['app/**/*.html'];
 var indexPath = ['app/index.html'];
 var buildDirectory = './build/';
-var defaultTasks = [
-    'lint',
-    'lint-test',
-    'scripts',
-    'sass',
-    'templates',
-    'copy-index',
-    'copy-lib'
-];
 
 gulp.task('lint', function() {
     return gulp.src(jsAppPath)
@@ -95,15 +87,30 @@ gulp.task('copy-index', function() {
 gulp.task('copy-lib', function() {
     return gulp.src(['bower_components/**', 'lib/**'])
         .pipe(gulp.dest(buildDirectory + 'lib'));
-})
+});
 
-gulp.task('watch', function() {
+gulp.task('build', [
+    'lint',
+    'lint-test',
+    'scripts',
+    'sass',
+    'templates',
+    'copy-index',
+    'copy-lib'
+]);
+
+gulp.task('test', ['build'], function(done) {
+    new Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }, done).start();
+});
+
+gulp.task('tdd', ['test'], function() {
     gulp.watch(jsPath
         .concat(sassPath)
         .concat(angularTemplatesPath)
-        .concat(indexPath), defaultTasks);
+        .concat(indexPath), ['test']);
 });
 
-gulp.task('build', defaultTasks)
-
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['tdd']);
