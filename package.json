@@ -29,6 +29,10 @@
     "preinstall": "bundle install",
     "postinstall": "bower install && gulp build",
     "start": "http-server ./build -a localhost -p 8000 -c-1",
+<<<<<<< HEAD
+    "tdd": "gulp tdd",
+=======
+>>>>>>> 28ef059a7989616a9111bf1e965724b9f7ac7629
     "test": "karma start karma.conf.js --single-run"
   }
 }
