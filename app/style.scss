@@ -1,17 +1,28 @@
 $card-width: 100px;
 $card-height: 145px;
 $card-peek: $card-height - 35px;
+$card-border-radius: 5px;
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
 
 body {
     background-color: green;
+    overflow: hidden;
 }
 
 .pcard-bottom-of-stack {
     background-color: lightgreen;
+    border-radius: $card-border-radius;
 }
 
 .pcard-bottom-of-pile {
-    background-color: tomato;
+    border: 1px solid black;
+    border-radius: $card-border-radius;
     position: absolute;
 }
 
@@ -39,7 +50,6 @@ body {
     width: $card-width;
     margin: 5px;
     vertical-align: top;
-    border:1px solid black;
     position: relative;
 }
 
