@@ -1,0 +1,4 @@
+html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}body{background-color:green;overflow:hidden}.pcard-bottom-of-stack{background-color:lightgreen;border-radius:5px}.pcard-bottom-of-pile{border:1px solid black;border-radius:5px;position:absolute}*[class^="pcard-"],*[class*=" pcard-"]{width:100px;height:145px;display:block;background-repeat:no-repeat;background-size:100% 100%;z-index:5}.game{position:absolute;width:100%;height:100%}.game-row{position:relative;display:flex}.game-column{width:100px;margin:5px;vertical-align:top;position:relative}.waste-card,.foundation-card,.stock-card{top:0px;left:0px;position:absolute}.pile-card{margin-bottom:-110px}.pile{height:1465px}
+
+
+/*# sourceMappingURL=style.min.css.map */
