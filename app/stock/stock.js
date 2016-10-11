@@ -60,15 +60,24 @@
         return Stock;
     }]);
 
-    app.directive('stock', function() {
+    app.directive('stock', ['$document', function($document) {
+
 
         var link = function(scope, element, attrs) {
-            element.on('click', function(event) {
+            function drawCard() {
                 var cards = scope.stock.cards;
                 scope.$emit('drawCard', cards.length > 0
                     ? cards[cards.length - 1].id
                     : 'EMPTY');
+            }
+
+            $document.bind('keydown', function($event) {
+                if ($event.key === ' ') {
+                    drawCard();
+                    $event.preventDefault();
+                }
             });
+            element.on('click', drawCard);
         };
 
         return {
@@ -80,5 +89,5 @@
             },
             templateUrl: 'app/stock/stock.html'
         };
-    });
+    }]);
 })();
